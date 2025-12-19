@@ -1,33 +1,42 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const { app } = require('electron');
 
 let db;
 
 function init() {
-  db = new sqlite3.Database(path.join(__dirname, '../db/database.sqlite'));
-  db.serialize(() => {
-    db.run(`
-      CREATE TABLE IF NOT EXISTS employees(
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT,
-        employeeId TEXT,
-        designation TEXT,
-        department TEXT,
-        doj TEXT,
-        location TEXT,
-        bankName TEXT,
-        accountNumber TEXT,
-        ifsc TEXT,
-        pfNo TEXT,
-        pfUAN TEXT,
-        esiNo TEXT,
-        pan TEXT,
-        basic REAL,
-        hra REAL,
-        specialAllowance REAL
-      )
-    `);
+ const dbPath = path.join(app.getPath('userData'), 'database.sqlite');
+
+  db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+      console.error('SQLite open error:', err.message);
+      return;
+    }
+    console.log('SQLite connected:', dbPath);
   });
+
+  // ✅ serialize HATA DIYA
+  db.run(`
+    CREATE TABLE IF NOT EXISTS employees(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT,
+      employeeId TEXT,
+      designation TEXT,
+      department TEXT,
+      doj TEXT,
+      location TEXT,
+      bankName TEXT,
+      accountNumber TEXT,
+      ifsc TEXT,
+      pfNo TEXT,
+      pfUAN TEXT,
+      esiNo TEXT,
+      pan TEXT,
+      basic REAL,
+      hra REAL,
+      specialAllowance REAL
+    )
+  `);
 }
 
 function getEmployees() {

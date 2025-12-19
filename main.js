@@ -167,7 +167,13 @@ ipcMain.handle('generate-payslip-pdf', async (event, data) => {
 
   // ✅ SAVE IN /db FOLDER
   const fileName = `${data.employeeName}_${data.month}_${data.year}_Payslip.pdf`;
-  const filePath = path.join(__dirname, 'db', fileName);
+  
+// ✅ Replace with
+const payslipDir = path.join(app.getPath('documents'), 'Payslips');
+if (!fs.existsSync(payslipDir)) {
+  fs.mkdirSync(payslipDir, { recursive: true });
+}
+const filePath = path.join(payslipDir, fileName);
 
   fs.writeFileSync(filePath, pdfBuffer);
   require('electron').shell.openPath(filePath);
