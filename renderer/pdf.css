@@ -1,0 +1,188 @@
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f4f6fb;
+  color: #1f2937;
+  margin: 12mm;
+}
+
+/* ===== HEADER ===== */
+/* .header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+} */
+
+
+.header {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  padding: 14px;
+  border-radius: 12px;
+}
+
+.header-left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.company-logo {
+  width: 60px;
+  height: auto;
+}
+
+.header-center {
+  text-align: center;
+}
+
+.company {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.title {
+  font-size: 12px;
+  color: #e0e7ff;
+  margin-top: 4px;
+}
+
+
+.company {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.title {
+  font-size: 12px;
+  color: #e0e7ff;
+  margin-top: 4px;
+}
+
+/* ===== COMMON LAYOUT ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.section {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.spacer {
+  margin-top: 14px;
+}
+
+h3 {
+  font-size: 13px;
+  color: #1e40af;
+  border-bottom: 1px solid #c7d2fe;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+/* ===== TABLE ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+
+td, th {
+  padding: 5px;
+}
+
+td:first-child {
+  color: #64748b;
+  font-weight: bold;
+}
+
+/* ===== EARNINGS ===== */
+.salary th:nth-child(2),
+.salary th:nth-child(3),
+.salary td:nth-child(2),
+.salary td:nth-child(3) {
+  text-align: right;
+}
+
+.salary th {
+  font-weight: 700;
+}
+.salary th {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+
+.salary td {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ===== DEDUCTIONS ===== */
+.deduction th {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.deduction td {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* ===== ATTENDANCE ===== */
+.attendance th {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.attendance td {
+  text-align: center;
+}
+
+/* ===== TOTAL ===== */
+.total td {
+  font-weight: 700;
+}
+
+/* ===== NET PAY (FULL WIDTH BUTTON) ===== */
+.net-final {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #dcfce7;
+  text-align: center;
+  border: 1px solid #86efac;
+}
+
+.net-amount-final {
+  font-size: 18px;
+  font-weight: 800;
+  color: #065f46;
+}
+
+.net-words-final {
+  font-size: 11.5px;
+  margin-top: 4px;
+  color: #065f46;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  margin-top: 12px;
+  font-size: 10.5px;
+  text-align: center;
+  color: #6b7280;
+}
+.footer .highlight {
+  color: #1e3a8a;
+  font-weight: 600;
+}

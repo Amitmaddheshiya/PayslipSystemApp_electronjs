@@ -1,0 +1,39 @@
+{
+  "name": "payslip-system",
+  "version": "1.0.0",
+  "description": "Employee Management and Payslip Generator",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.nextview.payslip",
+    "productName": "Nextview Payslip System",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Nextview Payslip System"
+    }
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "pdfkit": "^0.13.0",
+    "sqlite3": "^5.1.7"
+  }
+}

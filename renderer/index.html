@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payslip System Developed By Amit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= TABS ================= -->
+<div class="nav">
+  <button class="tab-btn active" onclick="showPage('employee', this)">Employees</button>
+  <button class="tab-btn" onclick="showPage('payslip', this)">Payslip</button>
+</div>
+
+<!-- ================= EMPLOYEE PAGE ================= -->
+<div id="employeePage" class="page">
+
+  <div class="layout full">
+
+    <!-- LEFT : EMPLOYEE LIST -->
+    <div class="card list-card">
+      <h2>Employee List</h2>
+      <ul id="employeeList"></ul>
+    </div>
+
+    <!-- RIGHT : EMPLOYEE FORM -->
+    <div class="card form-card">
+      <h2>Add / Edit Employee</h2>
+
+      <form id="employeeForm">
+        <input type="hidden" id="empId">
+
+        <div class="form-grid">
+
+          <div class="form-row">
+            <label>Name</label>
+            <input id="name">
+          </div>
+
+          <div class="form-row">
+            <label>Employee ID</label>
+            <input id="employeeId">
+          </div>
+
+          <div class="form-row">
+            <label>Designation</label>
+            <input id="designation">
+          </div>
+
+          <div class="form-row">
+            <label>Department</label>
+            <input id="department">
+          </div>
+
+          <div class="form-row">
+            <label>Date of Joining</label>
+            <input type="date" id="doj">
+          </div>
+
+          <div class="form-row">
+            <label>Location</label>
+            <input id="location">
+          </div>
+
+          <div class="form-row">
+            <label>Bank Name</label>
+            <input id="bankName">
+          </div>
+
+          <div class="form-row">
+            <label>Account No</label>
+            <input id="accountNumber">
+          </div>
+
+          <div class="form-row">
+            <label>IFSC</label>
+            <input id="ifsc">
+          </div>
+
+          <div class="form-row">
+            <label>PF No</label>
+            <input id="pfNo">
+          </div>
+
+          <div class="form-row">
+            <label>UAN Number</label>
+            <input id="pfUAN">
+          </div>
+
+          <div class="form-row">
+            <label>PAN</label>
+            <input id="pan">
+          </div>
+
+          <div class="form-row">
+            <label>Basic</label>
+            <input type="number" id="basic">
+          </div>
+
+          <div class="form-row">
+            <label>HRA</label>
+            <input type="number" id="hra">
+          </div>
+
+          <div class="form-row">
+            <label>Special Allowance</label>
+            <input type="number" id="specialAllowance">
+          </div>
+
+        </div>
+
+        <button class="primary-btn">Save Employee</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= PAYSLIP PAGE ================= -->
+<div id="payslipPage" class="page" style="display:none">
+
+  <div class="layout full">
+
+    <!-- LEFT : GENERATE PAYSLIP -->
+    <div class="card form-card">
+      <h2>Generate Payslip</h2>
+
+      <form id="payslipForm">
+
+        <div class="form-row single">
+          <label>Employee</label>
+          <select id="employeeSelect"></select>
+        </div>
+
+        <div class="form-row single">
+          <label>Month</label>
+          <select id="monthSelect">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </div>
+
+        <div class="form-row single">
+          <label>Year</label>
+          <input type="number" id="yearSelect">
+        </div>
+
+        <div class="form-row single">
+          <label>Attendance Days</label>
+          <input type="number" id="attendance">
+        </div>
+
+        <button class="primary-btn">Generate Payslip</button>
+      </form>
+    </div>
+
+
+
+
+    <!-- RIGHT : PAYSLIP PREVIEW -->
+<div class="card preview-card" id="payslipPreview" style="display:none; max-width: 1000px; margin: auto;">
+
+  <!-- HEADER -->
+  <div class="preview-header">
+    <h2>Nextview Technologies Pvt Ltd</h2>
+    <h3>Payslip for <span id="pMonthYear"></span></h3>
+  </div>
+
+  <!-- EMPLOYEE + COMPANY -->
+  <div class="preview-grid two">
+
+    <!-- EMPLOYEE -->
+    <div>
+      <h4>Employee Details</h4>
+      <table>
+        <tr><td>Name</td><td id="pName"></td></tr>
+        <tr><td>Employee ID</td><td id="pEmpId"></td></tr>
+        <tr><td>Designation</td><td id="pDesig"></td></tr>
+        <tr><td>Department</td><td id="pDept"></td></tr>
+        <tr><td>Date of Joining</td><td id="pDoj"></td></tr>
+        <tr><td>PAN Number</td><td id="pPan"></td></tr>
+        <tr><td>PF Number</td><td id="pPfNo"></td></tr>
+        <tr><td>UAN Number</td><td id="pUan"></td></tr>
+      </table>
+    </div>
+
+    <!-- COMPANY -->
+    <div>
+      <h4>Company Details</h4>
+      <table>
+        <tr><td>Company Name</td><td>Nextview Technologies Pvt Ltd</td></tr>
+        <tr>
+          <td>Address</td>
+          <td>
+            409-410 Maurya Atria,<br>
+            Nr. Atithi Restaurant Cross Road,<br>
+            Bodakdev, Ahmedabad-380054
+          </td>
+        </tr>
+        <tr><td>Phone</td><td>1800 270 0139</td></tr>
+        <tr><td>Email</td><td>info@nexttechgroup.com</td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- EARNINGS + DEDUCTIONS -->
+  <div class="preview-grid two">
+
+    <!-- EARNINGS -->
+    <div>
+      <h4>Earnings</h4>
+      <table class="earning-table">
+        <tr class="head">
+          <td>Component</td>
+          <td>Full Month Amount</td>
+          <td>Actual Amount (31 days)</td>
+        </tr>
+        <tr>
+          <td>Basic Salary</td>
+          <td id="eBasicFull"></td>
+          <td id="eBasicActual"></td>
+        </tr>
+        <tr>
+          <td>House Rent Allowance</td>
+          <td id="eHraFull"></td>
+          <td id="eHraActual"></td>
+        </tr>
+        <tr>
+          <td>Special Allowance</td>
+          <td id="eSplFull"></td>
+          <td id="eSplActual"></td>
+        </tr>
+        <tr class="bold">
+          <td>Total Earnings</td>
+          <td id="eTotalFull"></td>
+          <td id="eTotalActual"></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- DEDUCTIONS + ATTENDANCE -->
+    <div>
+      <h4>Deductions</h4>
+      <table>
+        <tr><td>Provident Fund (PF)</td><td id="dPf"></td></tr>
+        <tr><td>Professional Tax (PT)</td><td id="dPt"></td></tr>
+          <tr><td>TDS</td><td id="dTds"></td></tr>
+        <tr class="bold"><td>Total Deductions</td><td id="dTotal"></td></tr>
+      </table>
+
+      <h4 style="margin-top:18px">Attendance Summary</h4>
+      <table>
+        <tr><td>Total Days in Month</td><td id="aTotal"></td></tr>
+        <tr><td>Present Days</td><td id="aPresent"></td></tr>
+        <tr><td>Absent Days</td><td id="aAbsent"></td></tr>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- PAYMENT DETAILS -->
+  <div class="preview-full">
+    <h4>Payment Details</h4>
+    <table>
+      <tr><td>Bank Name</td><td id="pBank"></td></tr>
+      <tr><td>Bank Account No</td><td id="pAcc"></td></tr>
+      <tr><td>Pay Period</td><td id="pPeriod"></td></tr>
+      <tr><td>Payment Mode</td><td>Bank Transfer</td></tr>
+    </table>
+  </div>
+
+  <!-- NET PAY -->
+  <div class="preview-net">
+    Net Salary Payable : ₹ <span id="pNet"></span>
+  </div>
+
+  <!-- DAYS PAID -->
+  <div class="preview-small">
+    Days Paid : <span id="pDays"></span>
+  </div>
+
+  <!-- NOTE -->
+  <div class="preview-note">
+    This is a computer-generated payslip and does not require a signature.
+  </div>
+
+  <div class="preview-actions">
+  <button id="downloadPdfBtn" class="pdf-btn">
+    Generate PDF
+  </button>
+</div>
+
+
+</div>
+
+
+
+  </div>
+</div>
+
+
+<script src="renderer.js"></script>
+<script>
+function showPage(page, btn) {
+  document.getElementById('employeePage').style.display = page === 'employee' ? 'block' : 'none';
+  document.getElementById('payslipPage').style.display = page === 'payslip' ? 'block' : 'none';
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>

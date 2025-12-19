@@ -1,0 +1,375 @@
+/* ================= GLOBAL ================= */
+body {
+  background: radial-gradient(circle at top, #020617, #000);
+  color: #f9fafb;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  padding: 28px;
+  font-size: 16px;
+}
+
+/* ================= TABS ================= */
+.nav {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.tab-btn {
+  padding: 14px 36px;
+  font-size: 16px;
+  background: linear-gradient(180deg, #020617, #0b1c3d);
+  border: 1px solid #d4af37;
+  color: #d4af37;
+  border-radius: 16px 16px 0 0;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.tab-btn:hover {
+  background: #0b1c3d;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #d4af37, #f5d97a);
+  color: #000;
+  border-color: #f5d97a;
+}
+
+/* ================= LAYOUT ================= */
+.layout.full {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 28px;
+}
+
+/* ================= CARD ================= */
+.card {
+  background: linear-gradient(180deg, #020617, #000);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow:
+    0 0 0 1px rgba(212,175,55,0.15),
+    0 25px 45px rgba(0,0,0,0.8);
+}
+
+/* ================= HEADINGS ================= */
+h2 {
+  font-size: 23px;
+  margin-bottom: 22px;
+  color: #d4af37;
+  letter-spacing: 0.5px;
+}
+
+h3 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #f5d97a;
+}
+
+/* ================= EMPLOYEE LIST ================= */
+#employeeList {
+  margin-top: 10px;
+}
+
+#employeeList li {
+  background: linear-gradient(180deg, #020617, #020617);
+  border: 1px solid #1e3a8a;
+  padding: 14px 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border 0.2s ease, transform 0.2s ease;
+}
+
+#employeeList li:hover {
+  border-color: #d4af37;
+  transform: translateY(-1px);
+}
+
+#employeeList button {
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#employeeList button:first-child {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: #fff;
+  margin-right: 8px;
+}
+
+#employeeList button:last-child {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  color: #fff;
+}
+
+/* ================= FORM GRID ================= */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 26px;
+  
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+}
+
+.form-row.single {
+  margin-bottom: 20px;
+  grid-template-columns: 190px 1fr;
+}
+
+/* ================= LABEL ================= */
+label {
+  color: #d4af37;
+  font-weight: 600;
+  text-align: right;
+  padding-right: 12px;
+  font-size: 14px;
+}
+
+/* ================= INPUT ================= */
+input,
+select {
+  background: linear-gradient(180deg, #000, #020617);
+  border: 1px solid #d4af37;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #927804;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #f5d97a;
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.25);
+}
+
+/* ================= PRIMARY BUTTON ================= */
+.primary-btn {
+  margin-top: 28px;
+  padding: 16px;
+  width: 100%;
+  font-size: 17px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #d4af37, #1e3a8a);
+  border: none;
+  cursor: pointer;
+  color: #000;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(212,175,55,0.35);
+}
+
+/* ================= PREVIEW ================= */
+.preview-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.preview-header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.preview-header h3 {
+  margin-top: 6px;
+  font-size: 16px;
+  color: #f5d97a;
+}
+
+.preview-grid.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 18px;
+}
+
+.preview-full {
+  margin-top: 22px;
+}
+
+.preview-box h4,
+.preview-grid h4,
+.preview-full h4 {
+  color: #d4af37;
+  border-bottom: 1px solid #1e3a8a;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+}
+
+.preview-grid table,
+.preview-full table {
+  width: 100%;
+  font-size: 14px;
+}
+
+.preview-grid td,
+.preview-full td {
+  padding: 6px 4px;
+}
+
+.preview-grid td:first-child,
+.preview-full td:first-child {
+  color: #9ca3af;
+  width: 45%;
+}
+
+.preview-grid .bold td {
+  font-weight: 700;
+  color: #fff;
+}
+
+.preview-net {
+  margin-top: 26px;
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e3a8a, #020617);
+  color: #22c55e;
+}
+
+.preview-small {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #f5d97a;
+}
+
+.preview-note {
+  margin-top: 14px;
+  font-size: 12px;
+  text-align: center;
+  color: #9ca3af;
+}
+.preview-note strong {
+  color: #d4af37;
+}
+
+.earning-table td {
+  text-align: right;
+}
+
+.earning-table td:first-child {
+  text-align: left;
+  color: #9ca3af;
+}
+
+.earning-table .head td {
+  font-weight: 700;
+  color: #f5d97a;
+  border-bottom: 1px solid #1e3a8a;
+}
+
+
+.preview-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.pdf-btn {
+  padding: 14px 26px;
+  font-size: 15px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #22c55e, #15803d);
+  color: #000;
+  border: none;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pdf-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 25px rgba(34,197,94,0.4);
+}
+
+
+/* ================= PDF PRINT STYLES ================= */
+@media print {
+
+  body {
+    background: #020617 !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card {
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* HEADER */
+  .preview-header h2 {
+    color: #d4af37 !important; /* GOLD */
+    font-size: 24px !important;
+    font-weight: 900;
+  }
+
+  .preview-header h3 {
+    color: #f5d97a !important; /* LIGHT GOLD */
+    font-size: 16px !important;
+  }
+
+  /* SECTION HEADINGS */
+  .preview-grid h4,
+  .preview-full h4 {
+    color: #1e3a8a !important; /* DEEP BLUE */
+    font-weight: 800;
+    border-bottom: 1px solid #1e3a8a;
+  }
+
+  /* TABLE TEXT */
+  table td {
+    color: #e5e7eb !important;
+    font-size: 13px !important;
+  }
+
+  /* DEDUCTIONS RED */
+  .preview-grid table td:first-child {
+    color: #f87171 !important; /* RED LABELS */
+  }
+
+  /* NET SALARY */
+  .preview-net {
+    background: linear-gradient(135deg, #86efac, #22c55e) !important;
+    color: #ffffff !important;
+    font-size: 22px !important;
+    font-weight: 900;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  /* REMOVE BUTTONS */
+  .preview-actions {
+    display: none !important;
+  }
+
+  /* FORCE ONE PAGE */
+  .page,
+  .layout {
+    page-break-inside: avoid;
+  }
+}
