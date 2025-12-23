@@ -23,6 +23,7 @@ function init() {
       employeeId TEXT,
       designation TEXT,
       department TEXT,
+       company TEXT,
       doj TEXT,
       location TEXT,
       bankName TEXT,
@@ -52,14 +53,29 @@ function addEmployee(emp) {
   return new Promise((resolve, reject) => {
     const stmt = db.prepare(`
       INSERT INTO employees
-      (name, employeeId, designation, department, doj, location, bankName, accountNumber, ifsc, pfNo, pfUAN, esiNo, pan, basic, hra, specialAllowance)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+(name, employeeId, designation, department, company, doj, location,
+ bankName, accountNumber, ifsc, pfNo, pfUAN, esiNo, pan,
+ basic, hra, specialAllowance)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     stmt.run([
-      emp.name, emp.employeeId, emp.designation, emp.department, emp.doj,
-      emp.location, emp.bankName, emp.accountNumber, emp.ifsc,
-      emp.pfNo, emp.pfUAN, emp.esiNo, emp.pan,
-      emp.basic, emp.hra, emp.specialAllowance
+       emp.name,
+  emp.employeeId,
+  emp.designation,
+  emp.department,
+  emp.company,
+  emp.doj,
+  emp.location,
+  emp.bankName,
+  emp.accountNumber,
+  emp.ifsc,
+  emp.pfNo,
+  emp.pfUAN,
+  emp.esiNo,
+  emp.pan,
+  emp.basic,
+  emp.hra,
+  emp.specialAllowance
     ], function(err) {
       if (err) reject(err);
       else resolve(this.lastID);
@@ -72,21 +88,56 @@ function updateEmployee(emp) {
   return new Promise((resolve, reject) => {
     db.run(`
       UPDATE employees SET
-        name=?, employeeId=?, designation=?, department=?, doj=?,
-        location=?, bankName=?, accountNumber=?, ifsc=?,
-        pfNo=?, pfUAN=?, esiNo=?, pan=?, basic=?, hra=?, specialAllowance=?
+        name=?,
+        employeeId=?,
+        designation=?,
+        department=?,
+        company=?,
+        doj=?,
+        location=?,
+        bankName=?,
+        accountNumber=?,
+        ifsc=?,
+        pfNo=?,
+        pfUAN=?,
+        esiNo=?,
+        pan=?,
+        basic=?,
+        hra=?,
+        specialAllowance=?
       WHERE id=?
-    `, [
-      emp.name, emp.employeeId, emp.designation, emp.department, emp.doj,
-      emp.location, emp.bankName, emp.accountNumber, emp.ifsc,
-      emp.pfNo, emp.pfUAN, emp.esiNo, emp.pan,
-      emp.basic, emp.hra, emp.specialAllowance, emp.id
-    ], function(err) {
-      if (err) reject(err);
-      else resolve();
+    `,
+    [
+      emp.name,
+      emp.employeeId,
+      emp.designation,
+      emp.department,
+      emp.company,
+      emp.doj,
+      emp.location,
+      emp.bankName,
+      emp.accountNumber,
+      emp.ifsc,
+      emp.pfNo,
+      emp.pfUAN,
+      emp.esiNo,
+      emp.pan,
+      emp.basic,
+      emp.hra,
+      emp.specialAllowance,
+      emp.id
+    ],
+    function (err) {
+      if (err) {
+        console.error("Update error:", err);
+        reject(err);
+      } else {
+        resolve();
+      }
     });
   });
 }
+
 
 function deleteEmployee(id) {
   return new Promise((resolve, reject) => {

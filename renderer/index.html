@@ -54,6 +54,26 @@
           </div>
 
           <div class="form-row">
+  <label>Company</label>
+  <select id="company">
+    <option value="">Select Company</option>
+
+    <option value="nextview">
+      Nextview Technologies (INDIA) Pvt Ltd
+    </option>
+
+    <option value="3view">
+      3View Trade LLP
+    </option>
+
+    <option value="nexttech">
+      Next Tech IT'S Care
+    </option>
+  </select>
+</div>
+
+
+          <div class="form-row">
             <label>Date of Joining</label>
             <input type="date" id="doj">
           </div>
@@ -173,7 +193,7 @@
 
   <!-- HEADER -->
   <div class="preview-header">
-    <h2>Nextview Technologies Pvt Ltd</h2>
+   <h2  id="pCompanyName"></h2>
     <h3>Payslip for <span id="pMonthYear"></span></h3>
   </div>
 
@@ -189,6 +209,7 @@
         <tr><td>Designation</td><td id="pDesig"></td></tr>
         <tr><td>Department</td><td id="pDept"></td></tr>
         <tr><td>Date of Joining</td><td id="pDoj"></td></tr>
+        <tr><td>Location</td><td id="pLocation"></td></tr>
         <tr><td>PAN Number</td><td id="pPan"></td></tr>
         <tr><td>PF Number</td><td id="pPfNo"></td></tr>
         <tr><td>UAN Number</td><td id="pUan"></td></tr>
@@ -196,22 +217,17 @@
     </div>
 
     <!-- COMPANY -->
-    <div>
-      <h4>Company Details</h4>
-      <table>
-        <tr><td>Company Name</td><td>Nextview Technologies Pvt Ltd</td></tr>
-        <tr>
-          <td>Address</td>
-          <td>
-            409-410 Maurya Atria,<br>
-            Nr. Atithi Restaurant Cross Road,<br>
-            Bodakdev, Ahmedabad-380054
-          </td>
-        </tr>
-        <tr><td>Phone</td><td>1800 270 0139</td></tr>
-        <tr><td>Email</td><td>info@nexttechgroup.com</td></tr>
-      </table>
-    </div>
+   <!-- COMPANY -->
+<div>
+  <h4>Company Details</h4>
+  <table>
+    <tr><td>Company Name</td><td id="cName"></td></tr>
+    <tr><td>Address</td><td id="cAddress"></td></tr>
+    <tr><td>Phone</td><td id="cPhone"></td></tr>
+    <tr><td>Email</td><td id="cEmail"></td></tr>
+  </table>
+</div>
+
 
   </div>
 
@@ -225,7 +241,7 @@
         <tr class="head">
           <td>Component</td>
           <td>Full Month Amount</td>
-          <td>Actual Amount (31 days)</td>
+          <td>Actual Amount (<span id="pPresentDays"></span>)</td>
         </tr>
         <tr>
           <td>Basic Salary</td>

@@ -1,6 +1,37 @@
 // ================= EMPLOYEE MANAGEMENT =================
 let lastPayslipData = null;
 
+const companyDetails = {
+  nextview: {
+    name: "Nextview Technologies (INDIA) Pvt Ltd",
+    address: `409-410 Maurya Atria,
+Nr. Atithi Restaurant Cross Road,
+Bodakdev, Ahmedabad-380054`,
+    phone: "1800 270 0139, 9925149964",
+    email: "info@nexttechgroup.com"
+  },
+  "3view": {
+    name: "3 View Trade LLP",
+    address: `T F 3, Shakti Square,
+Opp Management Enclave,
+Nehru Park Road, Vastrapur,
+Ahmedabad 380015`,
+    phone: "9904310022",
+    email: "info@nexttechgroup.com"
+  },
+  nexttech: {
+    name: "Next Tech IT'S Care",
+    address: `409-410 Maurya Atria,
+Nr. Atithi Hotel,
+Near Kasturi Tower,
+Bodakdev, Ahmedabad-380054`,
+    phone: "9033009558, 9510529827",
+    email: "info@nexttechgroup.com"
+  }
+};
+
+
+
 const form = document.getElementById('employeeForm');
 const employeeList = document.getElementById('employeeList');
 
@@ -36,6 +67,7 @@ async function loadEmployees() {
 
 function editEmployee(emp) {
   const name = document.getElementById('name');
+   const locationInput = document.getElementById('location'); // ✅ FIX
   editingId = emp.id;
 
   empId.value = emp.id;
@@ -43,8 +75,9 @@ function editEmployee(emp) {
   employeeId.value = emp.employeeId;
   designation.value = emp.designation;
   department.value = emp.department;
+  company.value = emp.company;   // ✅ ADD THIS
   doj.value = emp.doj;
-  location.value = emp.location;
+  locationInput.value = emp.location;
   bankName.value = emp.bankName;
   accountNumber.value = emp.accountNumber;
   ifsc.value = emp.ifsc;
@@ -66,8 +99,9 @@ form.addEventListener('submit', async e => {
     employeeId: employeeId.value,
     designation: designation.value,
     department: department.value,
+    company: company.value,   // ✅ ADD THIS
     doj: doj.value,
-    location: location.value,
+    location: document.getElementById('location').value, // ✅ FIX
     bankName: bankName.value,
     accountNumber: accountNumber.value,
     ifsc: ifsc.value,
@@ -126,7 +160,7 @@ payslipForm.addEventListener('submit', async e => {
   const gross = emp.basic + emp.hra + emp.specialAllowance;
   const earned = (gross / totalDays) * presentDays;
 
-  const pf = emp.basic * 0.12;
+  const pf = 1800;
 const pt = 200;
 
 // yearly & monthly salary
@@ -155,18 +189,36 @@ const net = earned - totalDed;
   pDesig.innerText = emp.designation;
   pDept.innerText = emp.department;
   pDoj.innerText = emp.doj;
+  pLocation.innerText = emp.location;
   pPan.innerText = emp.pan;
   pPfNo.innerText = emp.pfNo;
   pUan.innerText = emp.pfUAN;
 
+
+  const basicActual = (emp.basic / totalDays) * presentDays;
+const hraActual = (emp.hra / totalDays) * presentDays;
+const splActual = (emp.specialAllowance / totalDays) * presentDays;
+
+
   eBasicFull.innerText = `Rs. ${emp.basic.toFixed(2)}`;
-eBasicActual.innerText = `Rs. ${emp.basic.toFixed(2)}`;
+// eBasicActual.innerText = `Rs. ${emp.basic.toFixed(2)}`;
+eBasicActual.innerText = `Rs. ${basicActual.toFixed(2)}`;
 
 eHraFull.innerText = `Rs. ${emp.hra.toFixed(2)}`;
-eHraActual.innerText = `Rs. ${emp.hra.toFixed(2)}`;
+// eHraActual.innerText = `Rs. ${emp.hra.toFixed(2)}`;
+eHraActual.innerText = `Rs. ${hraActual.toFixed(2)}`;
 
 eSplFull.innerText = `Rs. ${emp.specialAllowance.toFixed(2)}`;
-eSplActual.innerText = `Rs. ${emp.specialAllowance.toFixed(2)}`;
+// eSplActual.innerText = `Rs. ${emp.specialAllowance.toFixed(2)}`;
+eSplActual.innerText = `Rs. ${splActual.toFixed(2)}`;
+
+
+
+
+
+
+
+
 
 eTotalFull.innerText = `Rs. ${gross.toFixed(2)}`;
 eTotalActual.innerText = `Rs. ${earned.toFixed(2)}`;
@@ -181,6 +233,8 @@ dTotal.innerText = `Rs. ${totalDed.toFixed(2)}`;
   aTotal.innerText = `${totalDays} days`;
   aPresent.innerText = `${presentDays} days`;
   aAbsent.innerText = `${totalDays - presentDays} days`;
+  pPresentDays.innerText = `${presentDays} days`;
+
 
   // PAYMENT
   pBank.innerText = emp.bankName;
@@ -190,6 +244,25 @@ dTotal.innerText = `Rs. ${totalDed.toFixed(2)}`;
   // NET
   pNet.innerText = net.toFixed(2);
   pDays.innerText = `${presentDays}/${totalDays} days`;
+
+
+  //
+  // ================= COMPANY DETAILS =================
+const comp = companyDetails[emp.company];
+
+if (comp) {
+  document.getElementById('pCompanyName').innerText = comp.name; // ✅ NEW
+  document.getElementById('cName').innerText = comp.name;
+  document.getElementById('cAddress').innerText = comp.address;
+  document.getElementById('cPhone').innerText = comp.phone;
+  document.getElementById('cEmail').innerText = comp.email;
+} else {
+  document.getElementById('cName').innerText = "-";
+  document.getElementById('cAddress').innerText = "-";
+  document.getElementById('cPhone').innerText = "-";
+  document.getElementById('cEmail').innerText = "-";
+}
+
 
   // ================= PDF =================
   
@@ -232,50 +305,61 @@ downloadBtn.addEventListener('click', async () => {
     presentDays
   } = lastPayslipData;
 
-  await window.api.generatePayslipPdf({
-    employeeName: emp.name,
-    month: monthName,
-    year,
-   templateData: {
-  NAME: emp.name,
-  EMPID: emp.employeeId,
-  DESIGNATION: emp.designation,
-  DEPARTMENT: emp.department,
-  DOJ: emp.doj,
-  PAN: emp.pan,
-  PF: emp.pfNo,
-  UAN: emp.pfUAN,
+  const comp = companyDetails[emp.company];
 
-  BASIC: emp.basic.toFixed(2),
-  BASIC_A: ((emp.basic / totalDays) * presentDays).toFixed(2),
+await window.api.generatePayslipPdf({
+  employeeName: emp.name,
+  month: monthName,
+  year,
+  templateData: {
 
-  HRA: emp.hra.toFixed(2),
-  HRA_A: ((emp.hra / totalDays) * presentDays).toFixed(2),
+    // ===== EMPLOYEE =====
+    NAME: emp.name,
+    EMPID: emp.employeeId,
+    DESIGNATION: emp.designation,
+    DEPARTMENT: emp.department,
+    DOJ: emp.doj,
+    LOCATION: emp.location,
+    PAN: emp.pan,
+    PF: emp.pfNo,
+    UAN: emp.pfUAN,
 
-  SPL: emp.specialAllowance.toFixed(2),
-  SPL_A: ((emp.specialAllowance / totalDays) * presentDays).toFixed(2),
+    // ===== COMPANY (NEW) =====
+    COMPANY_NAME: comp?.name || "",
+    COMPANY_ADDRESS: comp?.address || "",
+    COMPANY_PHONE: comp?.phone || "",
+    COMPANY_EMAIL: comp?.email || "",
 
-  TOTAL_FULL: (emp.basic + emp.hra + emp.specialAllowance).toFixed(2),
-  TOTAL_ACTUAL: earned.toFixed(2),
+    // ===== SALARY =====
+    BASIC: emp.basic.toFixed(2),
+    BASIC_A: ((emp.basic / totalDays) * presentDays).toFixed(2),
 
-  PF_AMT: pf.toFixed(2),
-  PT: pt.toFixed(2),
-  TDS: tds.toFixed(2),
-  DED_TOTAL: totalDed.toFixed(2),
+    HRA: emp.hra.toFixed(2),
+    HRA_A: ((emp.hra / totalDays) * presentDays).toFixed(2),
 
-  TOTAL_DAYS: `${totalDays} days`,
-  PRESENT_DAYS: `${presentDays} days`,
-  ABSENT_DAYS: `${totalDays - presentDays} days`,
+    SPL: emp.specialAllowance.toFixed(2),
+    SPL_A: ((emp.specialAllowance / totalDays) * presentDays).toFixed(2),
 
-  BANK: emp.bankName,
-  ACCOUNT: emp.accountNumber,
-  MONTH_YEAR: `${monthName} ${year}`,
-  NET: net.toFixed(2),
-  NET_WORDS: convertNumberToWords(net)
-}
+    TOTAL_FULL: (emp.basic + emp.hra + emp.specialAllowance).toFixed(2),
+    TOTAL_ACTUAL: earned.toFixed(2),
 
-    
-  });
+    PF_AMT: pf.toFixed(2),
+    PT: pt.toFixed(2),
+    TDS: tds.toFixed(2),
+    DED_TOTAL: totalDed.toFixed(2),
+
+    TOTAL_DAYS: `${totalDays} days`,
+    PRESENT_DAYS: `${presentDays} days`,
+    ABSENT_DAYS: `${totalDays - presentDays} days`,
+
+    BANK: emp.bankName,
+    ACCOUNT: emp.accountNumber,
+    MONTH_YEAR: `${monthName} ${year}`,
+    NET: net.toFixed(2),
+    NET_WORDS: convertNumberToWords(net)
+  }
+});
+
 });
 
 function convertNumberToWords(amount) {

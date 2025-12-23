@@ -7,10 +7,6 @@
 </head>
 <body>
 
-<!-- <div class="header">
-  <h1 class="company">Nextview Technologies Pvt Ltd</h1>
-  <h2 class="title">Payslip for {{MONTH_YEAR}}</h2>
-</div> -->
 
 <div class="header">
   <div class="header-left">
@@ -19,7 +15,7 @@
   </div>
 
   <div class="header-center">
-    <h1 class="company">Nextview Technologies Pvt Ltd</h1>
+    <h1 class="company">{{COMPANY_NAME}}</h1>
     <h2 class="title">Payslip for {{MONTH_YEAR}}</h2>
   </div>
 </div>
@@ -35,6 +31,7 @@
       <tr><td>Designation :</td><td>{{DESIGNATION}}</td></tr>
       <tr><td>Department :</td><td>{{DEPARTMENT}}</td></tr>
       <tr><td>Date of Joining :</td><td>{{DOJ}}</td></tr>
+      <tr><td>Location :</td><td>{{LOCATION}}</td></tr>
       <tr><td>PAN Number :</td><td>{{PAN}}</td></tr>
       <tr><td>PF Number :</td><td>{{PF}}</td></tr>
       <tr><td>UAN Number :</td><td>{{UAN}}</td></tr>
@@ -44,12 +41,10 @@
   <div class="section">
     <h3>Company Details</h3>
     <table>
-      <tr><td>Company Name :</td><td>Nextview Technologies Pvt Ltd</td></tr>
-      <tr><td>Address :</td><td>409-410 Maurya Atria,
-Nr. Atithi Restaurant Cross Road,
-Bodakdev, Ahmedabad-380054</td></tr>
-      <tr><td>Email :</td><td>info@nexttechgroup.com</td></tr>
-      <tr><td>Contact :</td><td>1800 270 0139</td></tr>
+      <tr><td>Company Name :</td><td>{{COMPANY_NAME}}</td></tr>
+<tr><td>Address :</td><td>{{COMPANY_ADDRESS}}</td></tr>
+<tr><td>Email :</td><td>{{COMPANY_EMAIL}}</td></tr>
+<tr><td>Contact :</td><td>{{COMPANY_PHONE}}</td></tr>
     </table>
   </div>
 </div>
