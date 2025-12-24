@@ -138,7 +138,51 @@ async function loadEmployeeSelect() {
     opt.textContent = emp.name;
     employeeSelect.appendChild(opt);
   });
+
+  setTimeout(toggleDeductionCheckboxByEmployee, 100);
+
 }
+
+const pfCheck = document.getElementById('pfCheck');
+const ptCheck = document.getElementById('ptCheck');
+const pfStatus = document.getElementById('pfStatus');
+const ptStatus = document.getElementById('ptStatus');
+const deductionSection = document.getElementById('deductionCheckboxSection');
+
+
+function updateDeductionStatus() {
+  pfStatus.innerText = pfCheck.checked ? "YES" : "NO";
+  ptStatus.innerText = ptCheck.checked ? "YES" : "NO";
+}
+
+pfCheck.addEventListener('change', updateDeductionStatus);
+ptCheck.addEventListener('change', updateDeductionStatus);
+
+// initial load
+updateDeductionStatus();
+
+async function toggleDeductionCheckboxByEmployee() {
+  const empId = Number(employeeSelect.value);
+  const employees = await window.api.getEmployees();
+  const emp = employees.find(e => e.id === empId);
+
+  if (!emp) return;
+
+  if (emp.company === "nextview") {
+    deductionSection.style.display = "block";
+    pfCheck.checked = true;
+    ptCheck.checked = true;
+  } else {
+    deductionSection.style.display = "none";
+    pfCheck.checked = false;
+    ptCheck.checked = false;
+  }
+
+  updateDeductionStatus();
+}
+employeeSelect.addEventListener('change', toggleDeductionCheckboxByEmployee);
+
+
 
 payslipForm.addEventListener('submit', async e => {
   e.preventDefault();
@@ -146,6 +190,7 @@ payslipForm.addEventListener('submit', async e => {
   const empId = Number(employeeSelect.value);
   const employees = await window.api.getEmployees();
   const emp = employees.find(x => x.id === empId);
+  
 
   const month = Number(monthSelect.value);
   const year = Number(yearSelect.value);
@@ -160,13 +205,21 @@ payslipForm.addEventListener('submit', async e => {
   const gross = emp.basic + emp.hra + emp.specialAllowance;
   const earned = (gross / totalDays) * presentDays;
 
-  let pf = 0;
+let pf = 0;
 let pt = 0;
 
 if (emp.company === "nextview") {
-  pf = 1800;
-  pt = 200;
+
+  if (pfCheck.checked) {
+    pf = 1800;
+  }
+
+  if (ptCheck.checked) {
+    pt = 200;
+  }
+
 }
+
 
 
 // yearly & monthly salary
