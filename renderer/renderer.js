@@ -160,8 +160,14 @@ payslipForm.addEventListener('submit', async e => {
   const gross = emp.basic + emp.hra + emp.specialAllowance;
   const earned = (gross / totalDays) * presentDays;
 
-  const pf = 1800;
-const pt = 200;
+  let pf = 0;
+let pt = 0;
+
+if (emp.company === "nextview") {
+  pf = 1800;
+  pt = 200;
+}
+
 
 // yearly & monthly salary
 const monthlySalary = earned;
