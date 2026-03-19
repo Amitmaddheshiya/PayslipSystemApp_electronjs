@@ -413,6 +413,7 @@ await window.api.generatePayslipPdf({
 
     BANK: emp.bankName,
     ACCOUNT: emp.accountNumber,
+    IFSC: emp.ifsc,
     MONTH_YEAR: `${monthName} ${year}`,
     NET: net.toFixed(2),
     NET_WORDS: convertNumberToWords(net)

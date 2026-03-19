@@ -1,6 +1,6 @@
 {
   "name": "payslip-system",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Employee Management and Payslip Generator",
   "main": "main.js",
   "scripts": {
@@ -9,7 +9,7 @@
   },
   "build": {
     "appId": "com.nextview.payslip",
-    "productName": "Nextview Payslip System",
+    "productName": "NV-A Payslip System",
     "directories": {
       "output": "dist"
     },
@@ -25,7 +25,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Nextview Payslip System"
+      "shortcutName": "NV-A Payslip System"
     }
   },
   "devDependencies": {

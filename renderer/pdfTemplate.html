@@ -1,139 +1,172 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Payslip</title>
   <link rel="stylesheet" href="pdf.css">
 </head>
 <body>
+  <div class="page-shell">
+    <div class="page-outline">
+      <section class="hero">
+        <div class="hero-top">
+          <div class="brand-block">
+            <div class="logo-wrap">
+              <img src="data:image/png;base64,{{LOGO_BASE64}}" class="company-logo" alt="Company Logo">
+            </div>
+            <div class="brand-copy">
+              <p class="eyebrow">Salary Statement</p>
+              <h1 class="company">{{COMPANY_NAME}}</h1>
+              <p class="title">Payslip for {{MONTH_YEAR}}</p>
+            </div>
+          </div>
 
+          <div class="hero-chip">
+            <span class="chip-label">Net Salary</span>
+            <span class="chip-value">Rs. {{NET}}</span>
+          </div>
+        </div>
 
-<div class="header">
-  <div class="header-left">
-  <img src="data:image/png;base64,{{LOGO_BASE64}}" class="company-logo" />
+        <div class="hero-summary">
+          <div class="summary-item">
+            <span class="summary-label">Employee ID</span>
+            <strong class="summary-value">{{EMPID}}</strong>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Pay Period</span>
+            <strong class="summary-value">{{MONTH_YEAR}}</strong>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Present Days</span>
+            <strong class="summary-value">{{PRESENT_DAYS}}</strong>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Total Deductions</span>
+            <strong class="summary-value">Rs. {{DED_TOTAL}}</strong>
+          </div>
+        </div>
+      </section>
 
+      <section class="details-grid spacer">
+        <div class="info-card">
+          <div class="card-head">
+            <h3>Employee Details</h3>
+          </div>
+          <div class="info-list">
+            <div class="info-row"><span class="info-label">Name</span><span class="info-value">{{NAME}}</span></div>
+            <div class="info-row"><span class="info-label">Employee ID</span><span class="info-value">{{EMPID}}</span></div>
+            <div class="info-row"><span class="info-label">Designation</span><span class="info-value">{{DESIGNATION}}</span></div>
+            <div class="info-row"><span class="info-label">Department</span><span class="info-value">{{DEPARTMENT}}</span></div>
+            <div class="info-row"><span class="info-label">Date of Joining</span><span class="info-value">{{DOJ}}</span></div>
+            <div class="info-row"><span class="info-label">Location</span><span class="info-value">{{LOCATION}}</span></div>
+            <div class="info-row"><span class="info-label">PAN</span><span class="info-value">{{PAN}}</span></div>
+            <div class="info-row"><span class="info-label">PF Number</span><span class="info-value">{{PF}}</span></div>
+            <div class="info-row"><span class="info-label">UAN</span><span class="info-value">{{UAN}}</span></div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-head">
+            <h3>Company Details</h3>
+          </div>
+          <div class="info-list">
+            <div class="info-row"><span class="info-label">Company Name</span><span class="info-value">{{COMPANY_NAME}}</span></div>
+            <div class="info-row info-row-top"><span class="info-label">Address</span><span class="info-value preserve-lines">{{COMPANY_ADDRESS}}</span></div>
+            <div class="info-row"><span class="info-label">Email</span><span class="info-value">{{COMPANY_EMAIL}}</span></div>
+            <div class="info-row"><span class="info-label">Contact</span><span class="info-value">{{COMPANY_PHONE}}</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="salary-grid spacer">
+        <div class="table-card table-card-wide">
+          <div class="card-head">
+            <h3>Earnings</h3>
+          </div>
+          <table class="salary-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Full Month Amount</th>
+                <th>Actual Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Basic Salary</td>
+                <td>Rs. {{BASIC}}</td>
+                <td>Rs. {{BASIC_A}}</td>
+              </tr>
+              <tr>
+                <td>House Rent Allowance</td>
+                <td>Rs. {{HRA}}</td>
+                <td>Rs. {{HRA_A}}</td>
+              </tr>
+              <tr>
+                <td>Special Allowance</td>
+                <td>Rs. {{SPL}}</td>
+                <td>Rs. {{SPL_A}}</td>
+              </tr>
+              <tr class="total-row">
+                <td>Total Earnings</td>
+                <td>Rs. {{TOTAL_FULL}}</td>
+                <td>Rs. {{TOTAL_ACTUAL}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-card">
+          <div class="card-head card-head-danger">
+            <h3>Deductions</h3>
+          </div>
+          <table class="compact-table">
+            <tbody>
+              <tr><td>Provident Fund (PF)</td><td>Rs. {{PF_AMT}}</td></tr>
+              <tr><td>Professional Tax (PT)</td><td>Rs. {{PT}}</td></tr>
+              <tr><td>Tax Deducted at Source (TDS)</td><td>Rs. {{TDS}}</td></tr>
+              <tr class="total-row"><td>Total Deductions</td><td>Rs. {{DED_TOTAL}}</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="details-grid spacer">
+        <div class="info-card">
+          <div class="card-head">
+            <h3>Payment Details</h3>
+          </div>
+          <div class="info-list">
+            <div class="info-row"><span class="info-label">Bank Name</span><span class="info-value">{{BANK}}</span></div>
+            <div class="info-row"><span class="info-label">Account Number</span><span class="info-value">{{ACCOUNT}}</span></div>
+            <div class="info-row"><span class="info-label">IFSC Code</span><span class="info-value">{{IFSC}}</span></div>
+            <div class="info-row"><span class="info-label">Pay Period</span><span class="info-value">{{MONTH_YEAR}}</span></div>
+            <div class="info-row"><span class="info-label">Payment Mode</span><span class="info-value">Bank Transfer</span></div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="card-head">
+            <h3>Attendance Summary</h3>
+          </div>
+          <div class="info-list">
+            <div class="info-row"><span class="info-label">Total Days</span><span class="info-value">{{TOTAL_DAYS}}</span></div>
+            <div class="info-row"><span class="info-label">Present Days</span><span class="info-value accent-positive">{{PRESENT_DAYS}}</span></div>
+            <div class="info-row"><span class="info-label">Absent Days</span><span class="info-value accent-danger">{{ABSENT_DAYS}}</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="net-final spacer">
+        <p class="net-caption">Net Salary Payable</p>
+        <div class="net-amount-final">Rs. {{NET}}</div>
+        <div class="net-words-final">{{NET_WORDS}}</div>
+      </section>
+
+      <p class="footer">
+        This is a computer-generated payslip and does not require a signature.
+      </p>
+    </div>
   </div>
-
-  <div class="header-center">
-    <h1 class="company">{{COMPANY_NAME}}</h1>
-    <h2 class="title">Payslip for {{MONTH_YEAR}}</h2>
-  </div>
-</div>
-
-
-<!-- EMP + COMPANY -->
-<div class="two-col spacer">
-  <div class="section">
-    <h3>Employee Details</h3>
-    <table>
-      <tr><td>Name :</td><td>{{NAME}}</td></tr>
-      <tr><td>Employee ID :</td><td>{{EMPID}}</td></tr>
-      <tr><td>Designation :</td><td>{{DESIGNATION}}</td></tr>
-      <tr><td>Department :</td><td>{{DEPARTMENT}}</td></tr>
-      <tr><td>Date of Joining :</td><td>{{DOJ}}</td></tr>
-      <tr><td>Location :</td><td>{{LOCATION}}</td></tr>
-      <tr><td>PAN Number :</td><td>{{PAN}}</td></tr>
-      <tr><td>PF Number :</td><td>{{PF}}</td></tr>
-      <tr><td>UAN Number :</td><td>{{UAN}}</td></tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <h3>Company Details</h3>
-    <table>
-      <tr><td>Company Name :</td><td>{{COMPANY_NAME}}</td></tr>
-<tr><td>Address :</td><td>{{COMPANY_ADDRESS}}</td></tr>
-<tr><td>Email :</td><td>{{COMPANY_EMAIL}}</td></tr>
-<tr><td>Contact :</td><td>{{COMPANY_PHONE}}</td></tr>
-    </table>
-  </div>
-</div>
-
-<!-- EARNINGS + DEDUCTIONS -->
-<div class="two-col spacer">
- <div class="section">
-  <h3>Earnings</h3>
-  <table class="salary">
-    <tr>
-      <th>Component</th>
-      <th>Full Month Amount</th>
-      <th>Actual Amount ({{PRESENT_DAYS}})</th>
-    </tr>
-
-    <tr>
-      <td>Basic Salary</td>
-      <td>Rs. {{BASIC}}</td>
-      <td>Rs. {{BASIC_A}}</td>
-    </tr>
-
-    <tr>
-      <td>House Rent Allowance</td>
-      <td>Rs. {{HRA}}</td>
-      <td>Rs. {{HRA_A}}</td>
-    </tr>
-
-    <tr>
-      <td>Special Allowance</td>
-      <td>Rs. {{SPL}}</td>
-      <td>Rs. {{SPL_A}}</td>
-    </tr>
-
-    <tr class="total" style="background-color: #dbe3e7;">
-      <td>Total Earnings</td>
-      <td>Rs. {{TOTAL_FULL}}</td>
-      <td>Rs. {{TOTAL_ACTUAL}}</td>
-    </tr>
-  </table>
-</div>
-
-
-  <div class="section">
-    <h3 style="color: red;">Deductions</h3>
-    <table class="deduction">
-      <tr><td>Provident Fund (PF)</td><td>{{PF_AMT}}</td></tr>
-      <tr><td>Professional Tax (PT)</td><td>{{PT}}</td></tr>
-      <tr><td>Tax Deducted at Source (TDS)</td><td>{{TDS}}</td></tr>
-      <tr class="total" style="background-color: #dbe3e7;"><td>Total Deductions</td><td>{{DED_TOTAL}}</td></tr>
-    </table>
-  </div>
-</div>
-
-<!-- PAYMENT + ATTENDANCE -->
-<div class="two-col spacer">
-  <div class="section">
-    <h3>Payment Details</h3>
-    <table>
-      <tr><td>Bank Name :</td><td>{{BANK}}</td></tr>
-      <tr><td>Bank Account No :</td><td>{{ACCOUNT}}</td></tr>
-      <tr><td>Pay Period :</td><td>{{MONTH_YEAR}}</td></tr>
-      <tr><td>Payment Mode :</td><td>Bank Transfer</td></tr>
-    </table>
-  </div>
-
-  <div class="section">
-    <h3>Attendance Summary</h3>
-    <table>
-      <tr><td>Total Days in {{MONTH_YEAR}} :</td><td>{{TOTAL_DAYS}}</td></tr>
-      <tr><td>Present Days :</td><td style="color: red;">{{PRESENT_DAYS}}</td></tr>
-      <tr><td>Absent Days :</td><td style="color: green;">{{ABSENT_DAYS}}</td></tr>
-    </table>
-  </div>
-</div>
-
-<!-- NET SALARY -->
-<div class="net-final">
-  <div class="net-amount-final">
-    Net Salary Payable : Rs {{NET}}
-  </div>
-  <div class="net-words-final">
-    (In Words : {{NET_WORDS}})
-  </div>
-</div>
-
-<p class="footer">
-  This is a computer-generated payslip and does not require a signature.
-</p>
-
 </body>
-
 </html>
