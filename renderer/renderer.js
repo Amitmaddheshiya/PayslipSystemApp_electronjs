@@ -155,6 +155,13 @@ function updateDeductionStatus() {
   ptStatus.innerText = ptCheck.checked ? "YES" : "NO";
 }
 
+function formatDays(days) {
+  const value = Number(days);
+  if (!Number.isFinite(value)) return "0";
+
+  return Number.isInteger(value) ? String(value) : value.toFixed(1);
+}
+
 pfCheck.addEventListener('change', updateDeductionStatus);
 ptCheck.addEventListener('change', updateDeductionStatus);
 
@@ -196,6 +203,25 @@ payslipForm.addEventListener('submit', async e => {
   const year = Number(yearSelect.value);
   const presentDays = Number(attendance.value);
   const totalDays = new Date(year, month, 0).getDate();
+
+  if (!emp) {
+    alert('Please select an employee');
+    return;
+  }
+
+  if (!year || !Number.isFinite(presentDays)) {
+    alert('Please enter valid year and attendance days');
+    return;
+  }
+
+  if (presentDays < 0 || presentDays > totalDays || !Number.isInteger(presentDays * 2)) {
+    alert(`Attendance days must be between 0 and ${totalDays}, in half-day steps like 25 or 25.5`);
+    return;
+  }
+
+  const absentDays = totalDays - presentDays;
+  const presentDaysLabel = formatDays(presentDays);
+  const absentDaysLabel = formatDays(absentDays);
 
   const monthName = new Date(year, month - 1)
     .toLocaleString('default', { month: 'long' })
@@ -290,9 +316,9 @@ dTotal.innerText = `Rs. ${totalDed.toFixed(2)}`;
 
   // ATTENDANCE
   aTotal.innerText = `${totalDays} days`;
-  aPresent.innerText = `${presentDays} days`;
-  aAbsent.innerText = `${totalDays - presentDays} days`;
-  pPresentDays.innerText = `${presentDays} days`;
+  aPresent.innerText = `${presentDaysLabel} days`;
+  aAbsent.innerText = `${absentDaysLabel} days`;
+  pPresentDays.innerText = `${presentDaysLabel} days`;
 
 
   // PAYMENT
@@ -302,7 +328,7 @@ dTotal.innerText = `Rs. ${totalDed.toFixed(2)}`;
 
   // NET
   pNet.innerText = net.toFixed(2);
-  pDays.innerText = `${presentDays}/${totalDays} days`;
+  pDays.innerText = `${presentDaysLabel}/${totalDays} days`;
 
 
   //
@@ -337,7 +363,10 @@ if (comp) {
   totalDed,
   net,
   totalDays,
-  presentDays
+  presentDays,
+  absentDays,
+  presentDaysLabel,
+  absentDaysLabel
 };
 });
 
@@ -361,7 +390,9 @@ downloadBtn.addEventListener('click', async () => {
     totalDed,
     net,
     totalDays,
-    presentDays
+    presentDays,
+    absentDaysLabel,
+    presentDaysLabel
   } = lastPayslipData;
 
   const comp = companyDetails[emp.company];
@@ -408,8 +439,8 @@ await window.api.generatePayslipPdf({
     DED_TOTAL: totalDed.toFixed(2),
 
     TOTAL_DAYS: `${totalDays} days`,
-    PRESENT_DAYS: `${presentDays} days`,
-    ABSENT_DAYS: `${totalDays - presentDays} days`,
+    PRESENT_DAYS: `${presentDaysLabel} days`,
+    ABSENT_DAYS: `${absentDaysLabel} days`,
 
     BANK: emp.bankName,
     ACCOUNT: emp.accountNumber,
